@@ -1,0 +1,30 @@
+﻿<Window x:Class="NodeGraph.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:commn="clr-namespace:NodeGraph.Common"
+        xmlns:local="clr-namespace:NodeGraph.Views"
+        xmlns:units="clr-namespace:NodeGraph.UI.Units"
+        commn:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="MainWindowView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <units:GraphCanvas Grid.Row="0" Grid.RowSpan="2"
+                           ItemsSource="{Binding Nodes}"
+                           SelectedItem="{Binding CurrentNode}"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0 8 24 0">
+            <Button Content="파일열기"/>
+            <Button Content="파일저장"/>
+            <Button Content="JSON추출"/>
+            <Button Content="클리어" Command="{Binding ClearCommand}"/>
+            <Button Content="테스트" Command="{Binding TestCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
