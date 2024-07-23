@@ -34,7 +34,7 @@ namespace NodeGraph.Common
             _execute?.Invoke();
         }
 
-        protected void RaiseCanExecuteChanged()
+        public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }

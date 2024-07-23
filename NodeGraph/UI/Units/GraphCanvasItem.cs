@@ -13,6 +13,7 @@ namespace NodeGraph.UI.Units
     public class GraphCanvasItem : ListBoxItem
     {
         private readonly Canvas _canvas;
+        private Label _label;
 
         static GraphCanvasItem()
         {
@@ -26,19 +27,36 @@ namespace NodeGraph.UI.Units
             _canvas = canvas;
         }
 
+        public override void OnApplyTemplate()
+        {
+            if (GetTemplateChild("PART_Label") is Label label) {
+                _label = label;
+            }
+        }
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
+            IsSelected = true;
+            _ = CaptureMouse();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnMouseMove(e);
+            if (IsMouseCaptured) {
+                double ratio = ActualHeight / (_label.ActualHeight / 2);
+                Point mousePoint = e.GetPosition(_canvas);
+                double left = mousePoint.X - (ActualWidth / 2);
+                double top = mousePoint.Y - (ActualHeight / ratio);
+                Canvas.SetLeft(this, left);
+                Canvas.SetTop(this, top);
+            }
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            base.OnMouseLeftButtonUp(e);
+            if (IsMouseCaptured) {
+                ReleaseMouseCapture();
+            }
         }
     }
 }

@@ -9,7 +9,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type units:GraphCanvas}">
-                    <ScrollViewer ClipToBounds="{TemplateBinding ClipToBounds}"
+                    <ScrollViewer x:Name="PART_ScrollViewer"
+                                  ClipToBounds="{TemplateBinding ClipToBounds}"
                                   UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                   VerticalScrollBarVisibility="Auto"
@@ -19,6 +20,13 @@
                                     Width="3000" Height="3000"
                                     IsItemsHost="True"/>
                         </Border>
+                        <ScrollViewer.ContextMenu>
+                            <ContextMenu StaysOpen="True">
+                                <MenuItem Header="01"/>
+                                <MenuItem Header="02"/>
+                                <MenuItem Header="03"/>
+                            </ContextMenu>
+                        </ScrollViewer.ContextMenu>
                     </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>

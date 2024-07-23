@@ -16,6 +16,8 @@
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderBrush" Value="#000000ff"/>
+        <Setter Property="BorderThickness" Value="3.0"/>
         <Setter Property="Background" Value="#eeeeee"/>
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="Template">
@@ -31,16 +33,23 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0"
+                            <Label x:Name="PART_Label"
+                                   Grid.Row="0"
                                    Content="Header"
                                    HorizontalAlignment="Center"/>
                             <ContentPresenter Grid.Row="1"/>
+                            <Grid.ContextMenu>
+                                <ContextMenu StaysOpen="True">
+                                    <MenuItem Header="1"/>
+                                    <MenuItem Header="2"/>
+                                    <MenuItem Header="3"/>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="BorderBrush" Value="#25ff00"/>
-                            <Setter Property="BorderThickness" Value="3.0"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

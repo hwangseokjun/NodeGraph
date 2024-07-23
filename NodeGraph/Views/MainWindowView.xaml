@@ -8,7 +8,7 @@
         xmlns:units="clr-namespace:NodeGraph.UI.Units"
         commn:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,7 +22,7 @@
                     Margin="0 8 24 0">
             <Button Content="파일열기"/>
             <Button Content="파일저장"/>
-            <Button Content="JSON추출"/>
+            <Button Content="JSON추출" Command="{Binding ExportJsonCommand}"/>
             <Button Content="클리어" Command="{Binding ClearCommand}"/>
             <Button Content="테스트" Command="{Binding TestCommand}"/>
         </StackPanel>
