@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NodeGraph.Views
+namespace NodeGraph.UI.Views
 {
     /// <summary>
-    /// DialogueContentView.xaml에 대한 상호 작용 논리
+    /// MainWindowView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class DialogueContentView : UserControl
+    public partial class MainWindowView : Window
     {
-        public DialogueContentView()
+        public MainWindowView()
         {
             InitializeComponent();
         }

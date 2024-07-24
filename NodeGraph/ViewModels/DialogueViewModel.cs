@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NodeGraph.UI.Units
+namespace NodeGraph.ViewModels
 {
-    public class ConnectorOutput : ConnectorBase
+    public class DialogueViewModel : GraphViewModelBase
     {
     }
 }

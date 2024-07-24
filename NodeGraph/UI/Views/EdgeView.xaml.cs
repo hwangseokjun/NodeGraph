@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NodeGraph.Views
+namespace NodeGraph.UI.Views
 {
     /// <summary>
-    /// ConditionContentView.xaml에 대한 상호 작용 논리
+    /// EdgeView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ConditionContentView : UserControl
+    public partial class EdgeView : UserControl
     {
-        public ConditionContentView()
+        public EdgeView()
         {
             InitializeComponent();
         }

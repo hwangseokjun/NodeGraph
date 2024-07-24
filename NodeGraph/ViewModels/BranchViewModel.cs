@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
-namespace NodeGraph.UI.Units
+namespace NodeGraph.ViewModels
 {
-    public class Edge
+    public class BranchViewModel : GraphViewModelBase
     {
     }
 }

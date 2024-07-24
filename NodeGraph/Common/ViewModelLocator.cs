@@ -30,9 +30,9 @@ namespace NodeGraph.Common
             }
 
             if ((bool)e.NewValue && d is FrameworkElement frameworkElement) {
-                Type viewType = d.GetType();
-                string typeStr = viewType.ToString().Replace("View", "ViewModel");
-                Type viewModelType = Type.GetType(typeStr);
+                string viewModelName = $"{d.GetType().Name}Model";
+                string fullname = $"NodeGraph.ViewModels.{viewModelName}";
+                Type viewModelType = Type.GetType(fullname);
                 object viewModel = Activator.CreateInstance(viewModelType);
                 frameworkElement.DataContext = viewModel;
             }

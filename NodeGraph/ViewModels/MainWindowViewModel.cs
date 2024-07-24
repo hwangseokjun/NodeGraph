@@ -1,65 +1,79 @@
 ﻿using NodeGraph.Common;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NodeGraph.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private const int _delay = 100;
+        private const double _maxZoom = 3.0;
+        private const double _minZoom = 0.3;
+
         private string _title;
-        private ContentViewModelBase _currentNode;
+        private double _zoomFactor;
+        private GraphViewModelBase _currentElement;
 
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
         }
-        public ContentViewModelBase CurrentNode
+        public double ZoomFactor
         {
-            get => _currentNode;
-            set => SetProperty(ref _currentNode, value);
+            get => _zoomFactor;
+            set => SetProperty(ref _zoomFactor, value);
         }
-        public ObservableCollection<ContentViewModelBase> Nodes { get; set; }
+        public GraphViewModelBase CurrentElement
+        {
+            get => _currentElement;
+            set => SetProperty(ref _currentElement, value);
+        }
+        public ObservableCollection<GraphViewModelBase> Elements { get; private set; }
 
-        public DelegateCommand TestCommand { get; private set; }
-        public DelegateCommand ExportJsonCommand { get; private set; }
-        public DelegateCommand ClearCommand { get; private set; }
+        public DelegateCommand AddCommand { get; private set; }
+        public DelegateCommand ZoomInCommand { get; private set; }
+        public DelegateCommand ZoomOutCommand { get; private set; }
 
         public MainWindowViewModel()
         {
-            Title = "Node Graph Editor";
-            Nodes = new ObservableCollection<ContentViewModelBase>();
-            Nodes.CollectionChanged += Nodes_CollectionChanged;
-            TestCommand = new DelegateCommand(Test);
-            ExportJsonCommand = new DelegateCommand(ExportJson, CanExportJson);
-            ClearCommand = new DelegateCommand(Clear, CanClear);
+            Elements = new ObservableCollection<GraphViewModelBase>();
+            AddCommand = new DelegateCommand(Add);
+            ZoomInCommand = new DelegateCommand(ZoomIn, CanZoomIn);
+            ZoomOutCommand = new DelegateCommand(ZoomOut, CanZoomOut);
+            Title = "Graph node editor";
+            ZoomFactor = 1.0;
         }
 
-        private void Nodes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected override void OnPropertyChanged(string propertyName)
         {
-            ExportJsonCommand.RaiseCanExecuteChanged();
-            ClearCommand.RaiseCanExecuteChanged();
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(ZoomFactor)) {
+                ZoomInCommand.RaiseCanExecuteChanged();
+                ZoomOutCommand.RaiseCanExecuteChanged();
+            }
         }
 
-        private void Test()
+        private void Add()
         {
-            Random random = new Random();
-            int i = random.Next(0, 2);
-            switch (i) {
+            var random = new Random();
+            int randi = random.Next(0, 4);
+            
+            switch (randi) {
             case 0:
-                Nodes.Add(new BranchContentViewModel());
+                Elements.Add(new ActionViewModel());
                 break;
             case 1:
-                Nodes.Add(new DialogueContentViewModel());
+                Elements.Add(new BranchViewModel());
                 break;
             case 2:
-                Nodes.Add(new ConditionContentViewModel());
+                Elements.Add(new ConditionViewModel());
+                break;
+            case 3:
+                Elements.Add(new DialogueViewModel());
                 break;
             default:
                 Debug.Fail("");
@@ -67,24 +81,30 @@ namespace NodeGraph.ViewModels
             }
         }
 
-        private void ExportJson()
+        private void ZoomIn()
         {
-            throw new NotImplementedException();
+            const double mul = 1.2;
+            double zoom = _zoomFactor * mul;
+            ZoomFactor = zoom < _maxZoom ? zoom : _maxZoom;
+            _ = Task.Delay(_delay);
         }
 
-        private bool CanExportJson()
+        private bool CanZoomIn()
         {
-            return 0 < Nodes.Count;
+            return _zoomFactor < _maxZoom;
+        }
+        
+        private void ZoomOut()
+        {
+            const double mul = 0.8;
+            double zoom = _zoomFactor * mul;
+            ZoomFactor = _minZoom < zoom ? zoom : _minZoom;
+            _ = Task.Delay(_delay);
         }
 
-        private void Clear()
+        private bool CanZoomOut()
         {
-            Nodes.Clear();
-        }
-
-        private bool CanClear()
-        {
-            return 0 < Nodes.Count;
+            return _minZoom < _zoomFactor;
         }
     }
 }

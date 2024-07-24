@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NodeGraph.Views
+namespace NodeGraph.UI.Views
 {
     /// <summary>
-    /// BranchContentView.xaml에 대한 상호 작용 논리
+    /// ConditionView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class BranchContentView : UserControl
+    public partial class ConditionView : UserControl
     {
-        public BranchContentView()
+        public ConditionView()
         {
             InitializeComponent();
         }

@@ -1,55 +1,50 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:model="clr-namespace:NodeGraph.ViewModels"
+                    xmlns:vm="clr-namespace:NodeGraph.ViewModels"
                     xmlns:units="clr-namespace:NodeGraph.UI.Units"
-                    xmlns:views="clr-namespace:NodeGraph.Views">
-    <DataTemplate DataType="{x:Type model:DialogueContentViewModel}">
-        <views:DialogueContentView/>
+                    xmlns:views="clr-namespace:NodeGraph.UI.Views">
+    <!-- Data templates -->
+    <DataTemplate DataType="{x:Type vm:ActionViewModel}">
+        <views:ActionView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type model:ConditionContentViewModel}">
-        <views:ConditionContentView/>
+    <DataTemplate DataType="{x:Type vm:BranchViewModel}">
+        <views:BranchView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type model:BranchContentViewModel}">
-        <views:BranchContentView/>
+    <DataTemplate DataType="{x:Type vm:ConditionViewModel}">
+        <views:ConditionView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DialogueViewModel}">
+        <views:DialogueView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EdgeViewModel}">
+        <views:EdgeView/>
+    </DataTemplate>
+    
+    <!-- Style -->
     <Style TargetType="{x:Type units:GraphCanvasItem}">
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="BorderBrush" Value="#000000ff"/>
-        <Setter Property="BorderThickness" Value="3.0"/>
-        <Setter Property="Background" Value="#eeeeee"/>
-        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="Background" Value="#00ffffff"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type units:GraphCanvasItem}">
-                    <Border CornerRadius="8"
-                            MinWidth="{TemplateBinding MinWidth}"
+                    <Border ClipToBounds="{TemplateBinding ClipToBounds}"
+                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                            CornerRadius="12"
+                            Padding="4">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label x:Name="PART_Label"
-                                   Grid.Row="0"
-                                   Content="Header"
-                                   HorizontalAlignment="Center"/>
-                            <ContentPresenter Grid.Row="1"/>
-                            <Grid.ContextMenu>
-                                <ContextMenu StaysOpen="True">
-                                    <MenuItem Header="1"/>
-                                    <MenuItem Header="2"/>
-                                    <MenuItem Header="3"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
+                            <ContentPresenter/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="#25ff00"/>
+                            <Setter Property="Background" Value="#7725ff00"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#25ff00"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
