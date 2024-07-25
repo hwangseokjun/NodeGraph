@@ -22,7 +22,7 @@
     
     <!-- Style -->
     <Style TargetType="{x:Type units:GraphCanvasItem}">
-        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="ClipToBounds" Value="False"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Background" Value="#00ffffff"/>
@@ -34,17 +34,17 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Background="{TemplateBinding Background}"
                             CornerRadius="12"
-                            Padding="4">
+                            Padding="2">
                         <Grid>
                             <ContentPresenter/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#7725ff00"/>
+                            <Setter Property="Background" Value="{StaticResource VertexMouseOverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#25ff00"/>
+                            <Setter Property="Background" Value="{StaticResource VertexSelectedBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

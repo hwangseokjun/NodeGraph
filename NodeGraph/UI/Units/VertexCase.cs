@@ -9,21 +9,21 @@ using System.Windows.Media;
 
 namespace NodeGraph.UI.Units
 {
-    public class VertexCase : ContentControl
+    public class VertexCase : DockableBase
     {
         public static readonly DependencyProperty HeaderTextProperty =
             DependencyProperty.Register(nameof(HeaderText), typeof(string), typeof(VertexCase), new PropertyMetadata(null));
         public static readonly DependencyProperty HeaderBackgroundProperty =
-            DependencyProperty.Register(nameof(HeaderBackground), typeof(SolidColorBrush), typeof(VertexCase), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(HeaderBackground), typeof(Brush), typeof(VertexCase), new PropertyMetadata(null));
 
         public string HeaderText
         {
             get => (string)GetValue(HeaderTextProperty);
             set => SetValue(HeaderTextProperty, value);
         }
-        public SolidColorBrush HeaderBackground
+        public Brush HeaderBackground
         {
-            get => (SolidColorBrush)GetValue(HeaderBackgroundProperty);
+            get => (Brush)GetValue(HeaderBackgroundProperty);
             set => SetValue(HeaderBackgroundProperty, value);
         }
                 

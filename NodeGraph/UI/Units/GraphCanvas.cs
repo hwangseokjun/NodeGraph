@@ -21,6 +21,7 @@ namespace NodeGraph.UI.Units
         private double _vOffset;
         private ScrollViewer _scrollViewer;
         private Canvas _canvas;
+        private Grid _grid;
 
         public static readonly DependencyProperty ZoomFactorProperty =
             DependencyProperty.Register(nameof(ZoomFactor), typeof(double), typeof(GraphCanvas), new PropertyMetadata(1.0, OnZoomFactorChanged));
@@ -60,6 +61,10 @@ namespace NodeGraph.UI.Units
             if (GetTemplateChild("PART_Canvas") is Canvas canvas) {
                 _canvas = canvas;
             }
+
+            if (GetTemplateChild("PART_Grid") is Grid grid) {
+                _grid = grid;
+            }
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -75,7 +80,7 @@ namespace NodeGraph.UI.Units
                 var vStoryboard = new Storyboard();
                 var hStoryboard = new Storyboard();
                 var scale = new ScaleTransform(oldValue, oldValue);
-                graphCanvas._canvas.LayoutTransform = scale;
+                graphCanvas._grid.LayoutTransform = scale;
 
                 var anim = new DoubleAnimation();
                 var easing = new CubicEase();
@@ -87,14 +92,13 @@ namespace NodeGraph.UI.Units
 
                 hStoryboard.Children.Add(anim);
                 Storyboard.SetTargetProperty(anim, new PropertyPath("LayoutTransform.ScaleX"));
-                Storyboard.SetTarget(anim, graphCanvas._canvas);
+                Storyboard.SetTarget(anim, graphCanvas._grid);
                 hStoryboard.Begin();
 
                 vStoryboard.Children.Add(anim);
                 Storyboard.SetTargetProperty(anim, new PropertyPath("LayoutTransform.ScaleY"));
-                Storyboard.SetTarget(anim, graphCanvas._canvas);
+                Storyboard.SetTarget(anim, graphCanvas._grid);
                 vStoryboard.Begin();
-
             }
         }
 

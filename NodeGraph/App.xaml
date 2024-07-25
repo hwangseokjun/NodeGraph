@@ -6,7 +6,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/CommonBrushes.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/DarkButton.xaml"/>
                 <ResourceDictionary Source="/NodeGraph;component/UI/Themes/DarkScrollViewer.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/InputDock.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/OutputDock.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/DarkTextBox.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/BranchItem.xaml"/>
+                <ResourceDictionary Source="/NodeGraph;component/UI/Themes/Branch.xaml"/>
                 <ResourceDictionary Source="/NodeGraph;component/UI/Themes/VertexCase.xaml"/>
                 <ResourceDictionary Source="/NodeGraph;component/UI/Themes/GraphCanvasItem.xaml"/>
                 <ResourceDictionary Source="/NodeGraph;component/UI/Themes/GraphCanvas.xaml"/>

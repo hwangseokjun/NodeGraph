@@ -5,34 +5,28 @@
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Background" Value="#333333"/>
+        <Setter Property="Background" Value="{StaticResource NormalBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type units:GraphCanvas}">
                     <units:DarkScrollViewer x:Name="PART_ScrollViewer"
-                                  ClipToBounds="{TemplateBinding ClipToBounds}"
-                                  UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
-                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                  VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Auto">
-                        <Viewbox>
-                            <Canvas x:Name="PART_Canvas"
-                                    Width="3000" Height="3000"
-                                    IsItemsHost="True">
-                                <Canvas.Background>
-                                    <VisualBrush TileMode="Tile"
-                                                 Viewport="0 0 50 50" ViewportUnits="Absolute"
-                                                 Viewbox="0 0 50 50" ViewboxUnits="Absolute">
-                                        <VisualBrush.Visual>
-                                            <Rectangle Width="50" Height="50"
-                                                       Fill="{TemplateBinding Background}"
-                                                       Stroke="DarkGray"
-                                                       StrokeThickness="0.1"/>
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Canvas.Background>
-                            </Canvas>
-                        </Viewbox>
+                                            ClipToBounds="{TemplateBinding ClipToBounds}"
+                                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                            Background="{TemplateBinding Background}"
+                                            VerticalScrollBarVisibility="Auto"
+                                            HorizontalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Viewbox>
+                                <Grid x:Name="PART_Grid">
+                                    <Canvas Background="{StaticResource SmallGridBrush}"/>
+                                    <Canvas x:Name="PART_Canvas"
+                                            Background="{StaticResource LargeGridBrush}"
+                                            MinWidth="3000" MinHeight="3000"
+                                            IsItemsHost="True"/>
+                                </Grid>
+                            </Viewbox>
+                        </Grid>
                     </units:DarkScrollViewer>
                 </ControlTemplate>
             </Setter.Value>

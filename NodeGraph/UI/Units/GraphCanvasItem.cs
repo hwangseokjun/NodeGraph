@@ -28,8 +28,11 @@ namespace NodeGraph.UI.Units
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-            _ = CaptureMouse();
+            if (IsSelected) {
+                _ = CaptureMouse();
+            } else {
+                base.OnMouseLeftButtonDown(e);
+            }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

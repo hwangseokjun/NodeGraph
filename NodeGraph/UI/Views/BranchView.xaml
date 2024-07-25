@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:commn="clr-namespace:NodeGraph.Common"
              xmlns:units="clr-namespace:NodeGraph.UI.Units"
-             commn:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <units:VertexCase HeaderBackground="RosyBrown"
-                          HeaderText="Branch"/>
+        <units:VertexCase HeaderBackground="{StaticResource BranchHeaderBrush}"
+                          HeaderText="Branch">
+            <units:Branch ItemsSource="{Binding Dialogues}"/>
+        </units:VertexCase>
     </Grid>
 </UserControl>

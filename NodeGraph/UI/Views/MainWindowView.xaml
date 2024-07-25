@@ -20,7 +20,8 @@
                            ItemsSource="{Binding Elements}"
                            SelectedItem="{Binding CurrentElement}"/>
         <StackPanel Orientation="Horizontal">
-            <Button Content="추가" Command="{Binding AddCommand}"/>
+            <units:DarkButton Content="추가" Command="{Binding AddCommand}"/>
+            <units:DarkButton Content="삭제" Command="{Binding RemoveCommand}"/>
             <Slider Width="120"
                     Minimum="0.3"
                     Maximum="3.0"

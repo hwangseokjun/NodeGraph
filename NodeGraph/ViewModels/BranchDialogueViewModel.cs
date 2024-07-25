@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NodeGraph.ViewModels
 {
-    public abstract class GraphViewModelBase : ViewModelBase
+    public class BranchDialogueViewModel : OutputBase
     {
     }
 }

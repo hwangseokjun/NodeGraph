@@ -2,12 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:units="clr-namespace:NodeGraph.UI.Units">
     <Style TargetType="{x:Type units:VertexCase}">
-        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="ClipToBounds" Value="False"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="HeaderBackground" Value="#dedede"/>
-        <Setter Property="Foreground" Value="#ffffff"/>
-        <Setter Property="Background" Value="#eeeeee"/>
+        <Setter Property="BorderBrush" Value="{StaticResource NormalLightGrayBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NormalWhiteBrush}"/>
+        <Setter Property="Background" Value="{StaticResource NormalBackgroundBrush}"/>
         <Setter Property="MinWidth" Value="200"/>
         <Setter Property="MinHeight" Value="200"/>
         <Setter Property="Template">
@@ -20,19 +21,42 @@
                           MinHeight="{TemplateBinding MinHeight}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="12"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Grid.RowSpan="2"
-                                CornerRadius="12"
-                                Background="{TemplateBinding Background}"/>
-                        <Border Grid.Row="0"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0"
+                                Grid.ColumnSpan="3"
                                 CornerRadius="12 12 0 0"
-                                Background="{TemplateBinding HeaderBackground}">
-                            <Label Content="{TemplateBinding HeaderText}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                        </Border>
-                        <ContentPresenter Grid.Row="1"/>
+                                Height="12"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="2 2 2 0"
+                                Background="{TemplateBinding HeaderBackground}"/>
+                        <Border Grid.Row="1" Grid.Column="0"
+                                Grid.RowSpan="3" Grid.ColumnSpan="3"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="0 0 12 12"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="2 0 2 2"/>
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Content="{TemplateBinding HeaderText}"
+                               Foreground="{TemplateBinding Foreground}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                        <ContentPresenter Grid.Row="2" Grid.Column="1"/>
+                        <ContentControl x:Name="PART_InputContent"
+                                        Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                                        Focusable="False"/>
+                        <ContentControl x:Name="PART_OutputContent"
+                                        Grid.Row="0" Grid.Column="2" Grid.RowSpan="3"
+                                        Focusable="False"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

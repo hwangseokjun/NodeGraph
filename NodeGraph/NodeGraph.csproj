@@ -56,12 +56,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\AsyncCommand.cs" />
+    <Compile Include="UI\Units\Branch.cs" />
+    <Compile Include="UI\Units\BranchItem.cs" />
+    <Compile Include="UI\Units\DarkButton.cs" />
+    <Compile Include="UI\Units\DarkComboBox.cs" />
     <Compile Include="UI\Units\DarkScrollViewer.cs" />
+    <Compile Include="UI\Units\DarkTextBox.cs" />
+    <Compile Include="UI\Units\DockableBase.cs" />
+    <Compile Include="UI\Units\DockBase.cs" />
+    <Compile Include="UI\Units\Edge.cs" />
     <Compile Include="UI\Units\GraphCanvas.cs" />
     <Compile Include="UI\Units\GraphCanvasItem.cs" />
+    <Compile Include="UI\Units\InputDock.cs" />
+    <Compile Include="UI\Units\OutputDock.cs" />
     <Compile Include="UI\Units\VertexCase.cs" />
     <Compile Include="UI\Views\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\BranchDialogueView.xaml.cs">
+      <DependentUpon>BranchDialogueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\BranchView.xaml.cs">
       <DependentUpon>BranchView.xaml</DependentUpon>
@@ -78,12 +91,15 @@
     <Compile Include="UI\Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BoolToVisibleConverter.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="ViewModels\ActionViewModel.cs" />
+    <Compile Include="ViewModels\BranchDialogueViewModel.cs" />
     <Compile Include="ViewModels\BranchViewModel.cs" />
     <Compile Include="ViewModels\ConditionViewModel.cs" />
     <Compile Include="ViewModels\DialogueViewModel.cs" />
+    <Compile Include="ViewModels\Dockable.cs" />
     <Compile Include="ViewModels\EdgeViewModel.cs" />
-    <Compile Include="ViewModels\GraphViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -92,7 +108,31 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Common\ViewModelLocator.cs" />
+    <Page Include="UI\Themes\Branch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\BranchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\CommonBrushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\DarkButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\DarkComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Themes\DarkScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\DarkTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,11 +144,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Themes\InputDock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Themes\OutputDock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Themes\VertexCase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\ActionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\BranchDialogueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

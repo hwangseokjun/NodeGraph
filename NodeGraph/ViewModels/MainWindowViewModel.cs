@@ -1,6 +1,7 @@
 ﻿using NodeGraph.Common;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace NodeGraph.ViewModels
 
         private string _title;
         private double _zoomFactor;
-        private GraphViewModelBase _currentElement;
+        private ViewModelBase _currentElement;
 
         public string Title
         {
@@ -26,25 +27,53 @@ namespace NodeGraph.ViewModels
             get => _zoomFactor;
             set => SetProperty(ref _zoomFactor, value);
         }
-        public GraphViewModelBase CurrentElement
+        public ViewModelBase CurrentElement
         {
             get => _currentElement;
             set => SetProperty(ref _currentElement, value);
         }
-        public ObservableCollection<GraphViewModelBase> Elements { get; private set; }
+        public ObservableCollection<ViewModelBase> Elements { get; private set; }
 
         public DelegateCommand AddCommand { get; private set; }
+        public DelegateCommand RemoveCommand { get; private set; }
         public DelegateCommand ZoomInCommand { get; private set; }
         public DelegateCommand ZoomOutCommand { get; private set; }
 
         public MainWindowViewModel()
         {
-            Elements = new ObservableCollection<GraphViewModelBase>();
+            Elements = new ObservableCollection<ViewModelBase>();
+            Elements.CollectionChanged += Elements_CollectionChanged;
             AddCommand = new DelegateCommand(Add);
+            RemoveCommand = new DelegateCommand(Remove, CanRemove);
             ZoomInCommand = new DelegateCommand(ZoomIn, CanZoomIn);
             ZoomOutCommand = new DelegateCommand(ZoomOut, CanZoomOut);
             Title = "Graph node editor";
             ZoomFactor = 1.0;
+        }
+
+        private void Elements_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add) {
+                object newItem = Elements[e.NewStartingIndex];
+
+                if (newItem is IInputable inputable) {
+                    inputable.InputClicked += Inputable_InputClicked;
+                }
+
+                if (newItem is IOutputable outputable) {
+                    outputable.OutputClicked += Outputable_OutputClicked;
+                }
+            }
+        }
+
+        private void Inputable_InputClicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("input docked");
+        }
+
+        private void Outputable_OutputClicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("output docked");
         }
 
         protected override void OnPropertyChanged(string propertyName)
@@ -55,13 +84,40 @@ namespace NodeGraph.ViewModels
                 ZoomInCommand.RaiseCanExecuteChanged();
                 ZoomOutCommand.RaiseCanExecuteChanged();
             }
+
+            if (propertyName == nameof(CurrentElement)) {
+                RemoveCommand.RaiseCanExecuteChanged();
+            }
         }
 
+        private void Remove()
+        {
+            if (_currentElement is IInputable inputable) {
+                inputable.InputClicked -= Inputable_InputClicked;
+                Console.WriteLine("remove input docked");
+            }
+
+            if (_currentElement is IOutputable outputable) {
+                outputable.OutputClicked -= Outputable_OutputClicked;
+                Console.WriteLine("remove output docked");
+            }
+
+            if (_currentElement is IDisposable disposable) {
+                disposable.Dispose();
+            }
+
+            _ = Elements.Remove(_currentElement);
+        }
+
+        private bool CanRemove()
+        {
+            return _currentElement != null;
+        }
         private void Add()
         {
             var random = new Random();
             int randi = random.Next(0, 4);
-            
+
             switch (randi) {
             case 0:
                 Elements.Add(new ActionViewModel());
@@ -93,7 +149,7 @@ namespace NodeGraph.ViewModels
         {
             return _zoomFactor < _maxZoom;
         }
-        
+
         private void ZoomOut()
         {
             const double mul = 0.8;
