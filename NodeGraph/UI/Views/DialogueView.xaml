@@ -9,10 +9,10 @@
     <Grid>
         <units:VertexCase HeaderBackground="{StaticResource DialogueHeaderBrush}"
                           HeaderText="Dialogue">
-            <StackPanel Orientation="Vertical">
+            <StackPanel VerticalAlignment="Center"
+                        Orientation="Vertical">
                 <units:DarkTextBox/>
                 <units:DarkTextBox/>
-                <units:DarkTextBox Height="120"/>
             </StackPanel>
         </units:VertexCase>
     </Grid>

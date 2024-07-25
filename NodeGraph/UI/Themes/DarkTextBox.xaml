@@ -20,9 +20,10 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
-                            <ScrollViewer x:Name="PART_ContentHost"
-                                          Grid.Column="1"
-                                          Margin="4"/>
+                            <units:DarkScrollViewer x:Name="PART_ContentHost"
+                                                    Grid.Column="1"
+                                                    VerticalScrollBarVisibility="Auto"
+                                                    Margin="4"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

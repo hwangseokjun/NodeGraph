@@ -8,6 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <units:VertexCase HeaderBackground="{StaticResource ConditionHeaderBrush}"
-                          HeaderText="Condition"/>
+                          HeaderText="Condition">
+            <ComboBox VerticalAlignment="Center">
+                <ComboBoxItem Content="Has-a"/>
+                <ComboBoxItem Content="Has-b"/>
+                <ComboBoxItem Content="Has-c"/>
+            </ComboBox>
+        </units:VertexCase>
     </Grid>
 </UserControl>

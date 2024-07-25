@@ -8,6 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <units:VertexCase HeaderBackground="{StaticResource ActionHeaderBrush}"
-                          HeaderText="Action"/>
+                          HeaderText="Action">
+            <ComboBox VerticalAlignment="Center">
+                <ComboBoxItem Content="Wait"/>
+                <ComboBoxItem Content="Move"/>
+            </ComboBox>
+        </units:VertexCase>
     </Grid>
 </UserControl>
