@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NodeGraph.Utils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace NodeGraph.UI.Units
     public class GraphCanvasItem : ListBoxItem
     {
         private readonly Canvas _canvas;
+        private DockableBase _dockable;
+        private Point _clickPoint;
+        private Point _startPoint;
 
         static GraphCanvasItem()
         {
@@ -24,25 +28,31 @@ namespace NodeGraph.UI.Units
         {
             Debug.Assert(canvas != null);
             _canvas = canvas;
+            Loaded += GraphCanvasItem_Loaded;
+        }
+
+        private void GraphCanvasItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            _dockable = this.FindChildOrNull<DockableBase>();
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            if (IsSelected) {
-                _ = CaptureMouse();
-            } else {
-                base.OnMouseLeftButtonDown(e);
-            }
+            base.OnMouseLeftButtonDown(e);
+            _clickPoint = Mouse.GetPosition(_canvas);
+            _startPoint = TransformToAncestor(_canvas).Transform(new Point(0, 0));
+            _ = CaptureMouse();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (IsMouseCaptured) {
-                Point mousePoint = e.GetPosition(_canvas);
-                double left = mousePoint.X - (ActualWidth / 2);
-                double top = mousePoint.Y - (ActualHeight / 2);
+                Point mousePoint = Mouse.GetPosition(_canvas);
+                double left = _startPoint.X + (mousePoint.X - _clickPoint.X);
+                double top = _startPoint.Y + (mousePoint.Y - _clickPoint.Y);
                 Canvas.SetLeft(this, left);
                 Canvas.SetTop(this, top);
+                _dockable?.SetDockPositionInCanvas();
             }
         }
 

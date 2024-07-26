@@ -15,5 +15,9 @@ namespace NodeGraph.UI.Units
             DefaultStyleKeyProperty.OverrideMetadata(typeof(OutputDock),
                 new FrameworkPropertyMetadata(typeof(OutputDock)));
         }
+
+        public OutputDock(Canvas canvas) : base(canvas)
+        {
+        }
     }
 }

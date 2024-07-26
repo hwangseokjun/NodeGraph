@@ -16,6 +16,7 @@ namespace NodeGraph.ViewModels
         private string _title;
         private double _zoomFactor;
         private ViewModelBase _currentElement;
+        private IOutputable _currentDock;
 
         public string Title
         {
@@ -68,12 +69,14 @@ namespace NodeGraph.ViewModels
 
         private void Inputable_InputClicked(object sender, EventArgs e)
         {
-            Console.WriteLine("input docked");
+            if (_currentDock != null) {
+                Elements.Add(new EdgeViewModel((IInputable)sender, _currentDock));
+            }
         }
 
         private void Outputable_OutputClicked(object sender, EventArgs e)
         {
-            Console.WriteLine("output docked");
+            _currentDock = (IOutputable)sender;
         }
 
         protected override void OnPropertyChanged(string propertyName)

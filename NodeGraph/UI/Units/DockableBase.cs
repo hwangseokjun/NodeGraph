@@ -1,6 +1,8 @@
-﻿using NodeGraph.ViewModels;
+﻿using NodeGraph.Utils;
+using NodeGraph.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +24,24 @@ namespace NodeGraph.UI.Units
 
         public override void OnApplyTemplate()
         {
+            Canvas canvas = this.FindParentOrNull<Canvas>();
+            Debug.Assert(canvas != null);
+
             if (GetTemplateChild("PART_InputContent") is ContentControl intputContent) {
-                _inputDock = DataContext is IInputable ? new InputDock() : null;
+                _inputDock = DataContext is IInputable ? new InputDock(canvas) : null;
                 intputContent.Content = _inputDock;
             }
 
             if (GetTemplateChild("PART_OutputContent") is ContentControl outputContent) {
-                _outputDock = DataContext is IOutputable ? new OutputDock() : null;
+                _outputDock = DataContext is IOutputable ? new OutputDock(canvas) : null;
                 outputContent.Content = _outputDock;
             }
+        }
+
+        public void SetDockPositionInCanvas()
+        {
+            _inputDock?.SetPositionInCanvas();
+            _outputDock?.SetPositionInCanvas();
         }
     }
 }

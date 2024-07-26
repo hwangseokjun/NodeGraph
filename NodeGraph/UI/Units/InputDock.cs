@@ -15,5 +15,9 @@ namespace NodeGraph.UI.Units
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InputDock),
                 new FrameworkPropertyMetadata(typeof(InputDock)));
         }
+
+        public InputDock(Canvas canvas) : base(canvas)
+        {
+        }
     }
 }

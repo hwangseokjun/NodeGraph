@@ -10,6 +10,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource NormalYellowBrush}"/>
         <Setter Property="CheckedBrush" Value="{StaticResource NormalBlackBrush}"/>
         <Setter Property="Background" Value="{StaticResource NormalTransientBrush}"/>
+        <Setter Property="Position" Value="{Binding OutputPosition}"/>
         <Setter Property="Margin" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -21,7 +22,8 @@
                         <Rectangle Width="13" Height="13" Fill="{TemplateBinding Background}"
                                    Stroke="{TemplateBinding BorderBrush}"
                                    StrokeThickness="2.5"/>
-                        <Rectangle Width="9" Height="9" Fill="{TemplateBinding CheckedBrush}"
+                        <Rectangle x:Name="PART_Rectangle"
+                                   Width="9" Height="9" Fill="{TemplateBinding CheckedBrush}"
                                    Stroke="{StaticResource NormalBackgroundBrush}"
                                    StrokeThickness="1"/>
                     </Grid>
